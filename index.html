@@ -1,5 +1,4 @@
-<!DOCTYPE html> 
-
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -151,17 +150,17 @@
 
 <script>
     // URL de tu Web App de Apps Script
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzerZ2H01Rr1PeULKR92RkcpI2ezbsltrGMSYdUuncUHcWAVT9WLkV1w_9BQjDSVxLr/exec";
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzTXBoocac0_OWZoxhufpO4kUwlz99MUYt9nRiHV4D4Zhof6VXUyAH4Uf2_yeaSta_Hjg/exec";
 
     document.getElementById('clienteForm').addEventListener('submit', function (e) {
         e.preventDefault();
 
         const datos = {
-            nombreApellido: document.getElementById('nombreApellido').value,
-            dni: document.getElementById('dni').value,
+            nombreApellido: document.getElementById('nombre_completo').value,
+            dni: document.getElementById('numero_documento').value,
             contacto: document.getElementById('contacto').value,
             distrito: document.getElementById('distrito').value,
-            comprobante: document.getElementById('comprobante').value
+            comprobante: document.getElementById('numero_comprobante').value
         };
 
         fetch(WEB_APP_URL, {
@@ -183,4 +182,3 @@
     });
 </script>
 </body>
-</html>
