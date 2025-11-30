@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Clientes - Campaña Navideña</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fffdf7;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: linear-gradient(90deg, #c62828, #F2B84B, #2e7d32);
+            color: #fff;
+            text-align: center;
+            padding: 16px 10px;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .subtitulo {
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 24px 20px 28px;
+            border: 2px solid #000;
+            border-radius: 12px;
+            background-color: #f9f9f9;
+            box-sizing: border-box;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #000;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .help-text {
+            font-size: 12px;
+            color: #555;
+            margin-top: 4px;
+        }
+        button {
+            background-color: #F2B84B;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #ffc84c;
+        }
+        .nota {
+            font-size: 11px;
+            color: #555;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Registro de Clientes</h1>
+    <div class="subtitulo">Campaña Navideña Nuna Orgánica 🎄</div>
+</header>
+
+<div class="container">
+    <form id="clienteForm">
+        <!-- Nombre y Apellido -->
+        <div class="form-group">
+            <label for="nombreApellido">Nombre Completo:</label>
+            <input type="text" id="nombreApellido" name="nombreApellido" required
+                   placeholder="Ej: Jean Paul Vasquez">
+            <div class="help-text">
+                Escribe el nombre completo del cliente tal como figura en su documento de identidad.
+            </div>
+        </div>
+
+        <!-- Número de DNI -->
+        <div class="form-group">
+            <label for="dni">Número de Documento (DNI / CE):</label>
+            <input type="text" id="dni" name="dni" required
+                   placeholder="Ej: 76326343">
+            <div class="help-text">
+                El DNI son 8 dígitos sin puntos ni guiones (para CE puedes usar el número completo).
+            </div>
+        </div>
+
+        <!-- Número de contacto -->
+        <div class="form-group">
+            <label for="contacto">Número de Contacto:</label>
+            <input type="tel" id="contacto" name="contacto" required
+                   placeholder="Ej: 983742000">
+            <div class="help-text">
+                Ingresa un celular sin espacios donde podamos contactarlo (ej: 983742000).
+            </div>
+        </div>
+
+        <!-- Distrito -->
+        <div class="form-group">
+            <label for="distrito">Distrito:</label>
+            <select id="distrito" name="distrito" required>
+                <option value="">Seleccionar distrito</option>
+                <option value="Los Olivos">Los Olivos</option>
+                <option value="San Martín de Porres">San Martín de Porres</option>
+                <option value="San Juan de Lurigancho">San Juan de Lurigancho</option>
+                <option value="Comas">Comas</option>
+                <option value="Independencia">Independencia</option>
+                <option value="Callao">Callao</option>
+                <option value="Otro">Otro</option>
+            </select>
+            <div class="help-text">
+                Selecciona el distrito donde vive el cliente.
+            </div>
+        </div>
+
+        <!-- Número de boleta/factura -->
+        <div class="form-group">
+            <label for="comprobante">Número de Comprobante (boleta / factura):</label>
+            <input type="text" id="comprobante" name="comprobante" required
+                   placeholder="Ej: B001-1020">
+            <div class="help-text">
+                Usa el número en tu boleta digital o física: serie-correlativo (ej: B001-1020, F002-0321).
+            </div>
+        </div>
+
+        <button type="submit">Registrar participación</button>
+
+        <div class="nota">
+            *La información registrada será usada solo para la gestión de la campaña y el sorteo navideño.
+        </div>
+    </form>
+</div>
+
+<script>
+    // URL de tu Web App de Apps Script
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzerZ2H01Rr1PeULKR92RkcpI2ezbsltrGMSYdUuncUHcWAVT9WLkV1w_9BQjDSVxLr/exec";
+
+    document.getElementById('clienteForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const datos = {
+            nombreApellido: document.getElementById('nombreApellido').value,
+            dni: document.getElementById('dni').value,
+            contacto: document.getElementById('contacto').value,
+            distrito: document.getElementById('distrito').value,
+            comprobante: document.getElementById('comprobante').value
+        };
+
+        fetch(WEB_APP_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datos)
+        })
+        .then(() => {
+            alert('🎄 Registro enviado correctamente');
+            document.getElementById('clienteForm').reset();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Ocurrió un error al enviar el registro.');
+        });
+    });
+</script>
+</body>
+</html>
