@@ -4,36 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Registro de Clientes - Nuna Orgánica</title>
-
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #fffdf7;
       color: #222;
     }
-
     header {
       background: linear-gradient(90deg, #c62828, #f2b84b, #2e7d32);
       color: white;
       text-align: center;
       padding: 22px 12px;
     }
-
-    header h1 {
-      margin: 0;
-      font-size: 32px;
-    }
-
-    header p {
-      margin: 6px 0 0;
-      font-size: 15px;
-    }
-
+    header h1 { margin: 0; font-size: 32px; }
+    header p { margin: 6px 0 0; font-size: 15px; }
     .container {
       max-width: 640px;
       margin: 35px auto;
@@ -43,17 +29,8 @@
       border: 2px solid #222;
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
-
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 6px;
-    }
-
+    .form-group { margin-bottom: 18px; }
+    label { font-weight: bold; display: block; margin-bottom: 6px; }
     input, select {
       width: 100%;
       padding: 12px;
@@ -61,13 +38,7 @@
       border-radius: 8px;
       font-size: 15px;
     }
-
-    .help-text {
-      font-size: 12px;
-      color: #555;
-      margin-top: 4px;
-    }
-
+    .help-text { font-size: 12px; color: #555; margin-top: 4px; }
     button {
       width: 100%;
       background: #2e7d32;
@@ -80,23 +51,26 @@
       cursor: pointer;
       margin-top: 10px;
     }
-
-    button:hover {
-      background: #256428;
+    button:hover { background: #256428; }
+    button:disabled { background: #999; cursor: not-allowed; }
+    .nota { font-size: 11px; color: #555; margin-top: 14px; text-align: center; }
+    .bloque-datos {
+      display: none;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px dashed #999;
     }
-
-    button:disabled {
-      background: #999;
-      cursor: not-allowed;
-    }
-
-    .nota {
-      font-size: 11px;
-      color: #555;
-      margin-top: 14px;
+    .aviso {
+      display: none;
+      margin: 16px 0;
+      padding: 14px;
+      background: #fff8e1;
+      border: 1px solid #f2b84b;
+      border-radius: 8px;
+      color: #4a3a00;
+      font-weight: bold;
       text-align: center;
     }
-
     .resultado {
       display: none;
       margin-top: 22px;
@@ -106,20 +80,15 @@
       border: 2px solid #2e7d32;
       text-align: center;
     }
-
-    .resultado h2 {
-      color: #2e7d32;
-      margin-top: 0;
-    }
-
+    .resultado h2 { color: #2e7d32; margin-top: 0; }
     .ticket {
       font-size: 28px;
       font-weight: bold;
       color: #c62828;
       margin: 16px 0;
       letter-spacing: 1px;
+      word-break: break-word;
     }
-
     .error {
       display: none;
       margin-top: 18px;
@@ -131,31 +100,25 @@
       text-align: center;
       font-weight: bold;
     }
-
+    .secondary {
+      background: #f2b84b;
+      margin-top: 8px;
+    }
+    .secondary:hover { background: #e0a932; }
     @media (max-width: 700px) {
-      .container {
-        margin: 20px 14px;
-        padding: 22px;
-      }
-
-      header h1 {
-        font-size: 26px;
-      }
+      .container { margin: 20px 14px; padding: 22px; }
+      header h1 { font-size: 26px; }
     }
   </style>
 </head>
-
 <body>
-
 <header>
   <h1>Registro de Clientes</h1>
   <p>Campaña de Nuna Orgánica</p>
 </header>
 
 <div class="container">
-
   <form id="clienteForm">
-
     <div class="form-group">
       <label for="tipoDocumento">Tipo Documento:</label>
       <select id="tipoDocumento" required>
@@ -170,53 +133,58 @@
     <div class="form-group">
       <label for="numeroDocumento">Número de Documento:</label>
       <input type="text" id="numeroDocumento" required placeholder="Ej: 12345678" />
-      <div class="help-text">Ingresa el número sin puntos ni guiones.</div>
+      <div class="help-text">Primero verificaremos si ya tienes un registro.</div>
     </div>
 
-    <div class="form-group">
-      <label for="nombreCompleto">Nombre Completo:</label>
-      <input type="text" id="nombreCompleto" required placeholder="Ej: Juan Carlos Pérez García" />
+    <div class="aviso" id="avisoNuevo">
+      No encontramos tus datos. Completa la información para crear tu registro y generar tu primer ticket.
     </div>
 
-    <div class="form-group">
-      <label for="celular">Celular:</label>
-      <input type="tel" id="celular" required placeholder="Ej: 982742560" />
-    </div>
+    <div class="bloque-datos" id="bloqueDatos">
+      <div class="form-group">
+        <label for="nombreCompleto">Nombre Completo:</label>
+        <input type="text" id="nombreCompleto" placeholder="Ej: Juan Carlos Pérez García" />
+      </div>
 
-    <div class="form-group">
-      <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-      <input type="date" id="fechaNacimiento" required />
-    </div>
+      <div class="form-group">
+        <label for="celular">Celular:</label>
+        <input type="tel" id="celular" placeholder="Ej: 982742560" />
+      </div>
 
-    <div class="form-group">
-      <label for="genero">Género:</label>
-      <select id="genero" required>
-        <option value="">Seleccionar</option>
-        <option value="Femenino">Femenino</option>
-        <option value="Masculino">Masculino</option>
-        <option value="Prefiero no decirlo">Prefiero no decirlo</option>
-      </select>
-    </div>
+      <div class="form-group">
+        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fechaNacimiento" />
+      </div>
 
-    <div class="form-group">
-      <label for="canal">Canal:(¿Como Conocio a Nuna Organica ?)</label>
-      <select id="canal" required>
-        <option value="">Seleccionar canal</option>
-        <option value="Tienda">Tienda</option>
-        <option value="Google">Google</option>
-        <option value="Recomendacion">Recomendación</option>
-        <option value="Facebook">Facebook</option>
-        <option value="Instagram">Instagram</option>
-        <option value="Tik Tok">Tik Tok</option>
-        <option value="Youtube">Youtube</option>
-        <option value="Otro">Otro</option>
-      </select>
-    </div>
+      <div class="form-group">
+        <label for="genero">Género:</label>
+        <select id="genero">
+          <option value="">Seleccionar</option>
+          <option value="Femenino">Femenino</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+        </select>
+      </div>
 
-    <div class="form-group">
-      <label for="distrito">Distrito:</label>
-      <select id="distrito" required>
-        <option value="">Seleccionar distrito</option>
+      <div class="form-group">
+        <label for="canal">Canal: ¿Cómo conoció a Nuna Orgánica?</label>
+        <select id="canal">
+          <option value="">Seleccionar canal</option>
+          <option value="Tienda">Tienda</option>
+          <option value="Google">Google</option>
+          <option value="Recomendacion">Recomendación</option>
+          <option value="Facebook">Facebook</option>
+          <option value="Instagram">Instagram</option>
+          <option value="Tik Tok">Tik Tok</option>
+          <option value="Youtube">Youtube</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="distrito">Distrito:</label>
+        <select id="distrito">
+          <option value="">Seleccionar distrito</option>
         <option value="1-DI-ANCON">1-DI-ANCON</option>
         <option value="1-DI-ATE">1-DI-ATE</option>
         <option value="1-DI-BARRANCO">1-DI-BARRANCO</option>
@@ -290,35 +258,33 @@
         <option value="3-DE-TUMBES">3-DE-TUMBES</option>
         <option value="3-DE-UCAYALI">3-DE-UCAYALI</option>
         <option value="4-EXTRANJERO">4-EXTRANJERO</option>
-      </select>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="correoElectronico">Correo Electrónico: <small>(Opcional)</small></label>
+        <input type="email" id="correoElectronico" placeholder="Ej: cliente@gmail.com" />
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="correoElectronico">Correo Electrónico: <small></small></label>
-      <input type="email" id="correoElectronico" placeholder="Ej: cliente@gmail.com" />
-    </div>
-
-    <button type="submit" id="btnEnviar">Registrar participación</button>
+    <button type="submit" id="btnEnviar">Verificar documento</button>
+    <button type="button" class="secondary" id="btnEditarDoc" style="display:none;">Cambiar documento</button>
 
     <div class="nota">
       *La información registrada será usada solo para la gestión de la campaña y el sorteo.
     </div>
-
   </form>
 
   <div class="resultado" id="resultado">
     <h2>✅ Registro completado</h2>
-    <p>Datos confirmados y registrados exitosamente.</p>
+    <p id="mensajeResultado">Datos confirmados y registrados exitosamente.</p>
     <p>Tu ticket generado es:</p>
     <div class="ticket" id="ticketTexto">NUNA-000001</div>
     <p id="totalTexto">Ahora cuentas con 1 ticket para participar en el sorteo.</p>
     <p><strong>¡Muchas gracias por participar!</strong></p>
   </div>
 
-  <div class="error" id="errorBox">
-    Ocurrió un error al registrar la información.
-  </div>
-
+  <div class="error" id="errorBox">Ocurrió un error al registrar la información.</div>
 </div>
 
 <script>
@@ -326,10 +292,60 @@
 
   const form = document.getElementById("clienteForm");
   const btnEnviar = document.getElementById("btnEnviar");
+  const btnEditarDoc = document.getElementById("btnEditarDoc");
+  const bloqueDatos = document.getElementById("bloqueDatos");
+  const avisoNuevo = document.getElementById("avisoNuevo");
   const resultado = document.getElementById("resultado");
   const errorBox = document.getElementById("errorBox");
   const ticketTexto = document.getElementById("ticketTexto");
   const totalTexto = document.getElementById("totalTexto");
+  const mensajeResultado = document.getElementById("mensajeResultado");
+
+  let modo = "verificar";
+
+  function limpiar(v) {
+    return String(v || "").trim();
+  }
+
+  function setExtraRequired(required) {
+    ["nombreCompleto", "celular", "fechaNacimiento", "genero", "canal", "distrito"].forEach(id => {
+      document.getElementById(id).required = required;
+    });
+  }
+
+  function mostrarError(mensaje) {
+    errorBox.textContent = mensaje || "Ocurrió un error al registrar la información.";
+    errorBox.style.display = "block";
+  }
+
+  function mostrarResultado(data) {
+    ticketTexto.textContent = data.ticket || "NUNA-000001";
+    const totalTickets = Number(data.total_tickets || 1);
+    totalTexto.textContent = `Ahora cuentas con ${totalTickets} ticket${totalTickets === 1 ? "" : "s"} para participar en el sorteo.`;
+    mensajeResultado.textContent = data.message || "Datos confirmados y registrados exitosamente.";
+    resultado.style.display = "block";
+    avisoNuevo.style.display = "none";
+    bloqueDatos.style.display = "none";
+    btnEditarDoc.style.display = "none";
+    btnEnviar.textContent = "Verificar documento";
+    modo = "verificar";
+    form.reset();
+    setExtraRequired(false);
+    document.getElementById("tipoDocumento").disabled = false;
+    document.getElementById("numeroDocumento").readOnly = false;
+    window.scrollTo({ top: resultado.offsetTop - 20, behavior: "smooth" });
+  }
+
+  btnEditarDoc.addEventListener("click", () => {
+    modo = "verificar";
+    bloqueDatos.style.display = "none";
+    avisoNuevo.style.display = "none";
+    btnEditarDoc.style.display = "none";
+    btnEnviar.textContent = "Verificar documento";
+    setExtraRequired(false);
+    document.getElementById("tipoDocumento").disabled = false;
+    document.getElementById("numeroDocumento").readOnly = false;
+  });
 
   form.addEventListener("submit", async function(e) {
     e.preventDefault();
@@ -337,60 +353,65 @@
     errorBox.style.display = "none";
     resultado.style.display = "none";
 
+    const tipoDocumento = document.getElementById("tipoDocumento").value;
+    const numeroDocumento = limpiar(document.getElementById("numeroDocumento").value);
+
     const datos = {
-      tipo_documento: document.getElementById("tipoDocumento").value,
-      numero_documento: document.getElementById("numeroDocumento").value.trim(),
-      nombre_completo: document.getElementById("nombreCompleto").value.trim(),
-      celular: document.getElementById("celular").value.trim(),
-      fecha_nacimiento: document.getElementById("fechaNacimiento").value,
-      genero: document.getElementById("genero").value,
-      canal: document.getElementById("canal").value,
-      distrito: document.getElementById("distrito").value,
-      correo_electronico: document.getElementById("correoElectronico").value.trim()
+      action: modo,
+      tipo_documento: tipoDocumento,
+      numero_documento: numeroDocumento
     };
 
+    if (modo === "registrar") {
+      datos.nombre_completo = limpiar(document.getElementById("nombreCompleto").value);
+      datos.celular = limpiar(document.getElementById("celular").value);
+      datos.fecha_nacimiento = document.getElementById("fechaNacimiento").value;
+      datos.genero = document.getElementById("genero").value;
+      datos.canal = document.getElementById("canal").value;
+      datos.distrito = document.getElementById("distrito").value;
+      datos.correo_electronico = limpiar(document.getElementById("correoElectronico").value);
+    }
+
     btnEnviar.disabled = true;
-    btnEnviar.textContent = "Registrando...";
+    btnEnviar.textContent = modo === "verificar" ? "Verificando..." : "Registrando...";
 
     try {
       const response = await fetch(WEBHOOK_N8N_URL, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(datos)
       });
 
       const data = await response.json();
 
       if (!response.ok || data.success === false) {
-        throw new Error("Error en el registro");
+        throw new Error(data.message || "Error en el registro");
       }
 
-      ticketTexto.textContent = data.ticket || "NUNA-000001";
+      if (data.requires_data === true) {
+        modo = "registrar";
+        avisoNuevo.style.display = "block";
+        bloqueDatos.style.display = "block";
+        btnEditarDoc.style.display = "block";
+        btnEnviar.textContent = "Registrar y generar ticket";
+        setExtraRequired(true);
+        document.getElementById("tipoDocumento").disabled = true;
+        document.getElementById("numeroDocumento").readOnly = true;
+        window.scrollTo({ top: avisoNuevo.offsetTop - 20, behavior: "smooth" });
+        return;
+      }
 
-      const totalTickets = data.total_tickets || 1;
-
-      totalTexto.textContent =
-        `Ahora cuentas con ${totalTickets} ticket${totalTickets === 1 ? "" : "s"} para participar en el sorteo.`;
-
-      resultado.style.display = "block";
-      form.reset();
-
-      window.scrollTo({
-        top: resultado.offsetTop - 20,
-        behavior: "smooth"
-      });
+      mostrarResultado(data);
 
     } catch (error) {
       console.error(error);
-      errorBox.style.display = "block";
+      mostrarError(error.message);
     } finally {
       btnEnviar.disabled = false;
-      btnEnviar.textContent = "Registrar participación";
+      if (modo === "verificar") btnEnviar.textContent = "Verificar documento";
+      if (modo === "registrar") btnEnviar.textContent = "Registrar y generar ticket";
     }
   });
 </script>
-
 </body>
 </html>
