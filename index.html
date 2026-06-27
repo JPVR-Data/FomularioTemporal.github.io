@@ -5,413 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Registro de Clientes - Nuna Orgánica</title>
   <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fffdf7;
-      color: #222;
-    }
-    header {
-      background: linear-gradient(90deg, #c62828, #f2b84b, #2e7d32);
-      color: white;
-      text-align: center;
-      padding: 22px 12px;
-    }
-    header h1 { margin: 0; font-size: 32px; }
-    header p { margin: 6px 0 0; font-size: 15px; }
-    .container {
-      max-width: 640px;
-      margin: 35px auto;
-      background: #ffffff;
-      padding: 28px;
-      border-radius: 16px;
-      border: 2px solid #222;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    }
-    .form-group { margin-bottom: 18px; }
-    label { font-weight: bold; display: block; margin-bottom: 6px; }
-    input, select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #222;
-      border-radius: 8px;
-      font-size: 15px;
-    }
-    .help-text { font-size: 12px; color: #555; margin-top: 4px; }
-    button {
-      width: 100%;
-      background: #2e7d32;
-      color: white;
-      border: none;
-      padding: 14px;
-      border-radius: 8px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    button:hover { background: #256428; }
-    button:disabled { background: #999; cursor: not-allowed; }
-    .nota { font-size: 11px; color: #555; margin-top: 14px; text-align: center; }
-    .bloque-datos {
-      display: none;
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px dashed #999;
-    }
-    .aviso {
-      display: none;
-      margin: 16px 0;
-      padding: 14px;
-      background: #fff8e1;
-      border: 1px solid #f2b84b;
-      border-radius: 8px;
-      color: #4a3a00;
-      font-weight: bold;
-      text-align: center;
-    }
-    .resultado {
-      display: none;
-      margin-top: 22px;
-      padding: 22px;
-      border-radius: 14px;
-      background: #f1fff2;
-      border: 2px solid #2e7d32;
-      text-align: center;
-    }
-    .resultado h2 { color: #2e7d32; margin-top: 0; }
-    .ticket {
-      font-size: 28px;
-      font-weight: bold;
-      color: #c62828;
-      margin: 16px 0;
-      letter-spacing: 1px;
-      word-break: break-word;
-    }
-    .error {
-      display: none;
-      margin-top: 18px;
-      padding: 14px;
-      background: #ffecec;
-      color: #b00020;
-      border: 1px solid #b00020;
-      border-radius: 8px;
-      text-align: center;
-      font-weight: bold;
-    }
-    .secondary {
-      background: #f2b84b;
-      margin-top: 8px;
-    }
-    .secondary:hover { background: #e0a932; }
-    @media (max-width: 700px) {
-      .container { margin: 20px 14px; padding: 22px; }
-      header h1 { font-size: 26px; }
-    }
+    *{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:#fffdf7;color:#222} header{background:linear-gradient(90deg,#c62828,#f2b84b,#2e7d32);color:#fff;text-align:center;padding:22px 12px} header h1{margin:0;font-size:30px} header p{margin:6px 0 0;font-size:15px}.container{max-width:680px;margin:30px auto;background:#fff;padding:28px;border-radius:16px;border:2px solid #222;box-shadow:0 8px 20px rgba(0,0,0,.08)}.form-group{margin-bottom:18px}label{font-weight:bold;display:block;margin-bottom:6px}input,select{width:100%;padding:12px;border:1px solid #222;border-radius:8px;font-size:15px}.help-text{font-size:12px;color:#555;margin-top:4px}.fecha-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.hidden{display:none}.actions{display:grid;gap:10px}button{width:100%;background:#2e7d32;color:#fff;border:none;padding:14px;border-radius:8px;font-size:17px;font-weight:bold;cursor:pointer;margin-top:8px}button:hover{background:#256428}button:disabled{background:#999;cursor:not-allowed}.btn-sec{background:#777}.btn-sec:hover{background:#666}.nota{font-size:11px;color:#555;margin-top:14px;text-align:center}.resultado{display:none;margin-top:22px;padding:22px;border-radius:14px;background:#f1fff2;border:2px solid #2e7d32;text-align:center}.resultado h2{color:#2e7d32;margin-top:0}.ticket{font-size:28px;font-weight:bold;color:#c62828;margin:16px 0;letter-spacing:1px}.error{display:none;margin-top:18px;padding:14px;background:#ffecec;color:#b00020;border:1px solid #b00020;border-radius:8px;text-align:center;font-weight:bold}.info{display:none;margin-bottom:18px;padding:14px;background:#fff8e5;border:1px solid #f2b84b;border-radius:8px;text-align:center}@media(max-width:700px){.container{margin:20px 14px;padding:22px}header h1{font-size:25px}.fecha-grid{grid-template-columns:1fr 1fr 1fr}}
   </style>
 </head>
 <body>
-<header>
-  <h1>Registro de Clientes</h1>
-  <p>Campaña de Nuna Orgánica</p>
-</header>
-
+<header><h1>Registro de Clientes</h1><p>Campaña de Nuna Orgánica</p></header>
 <div class="container">
   <form id="clienteForm">
-    <div class="form-group">
-      <label for="tipoDocumento">Tipo Documento:</label>
-      <select id="tipoDocumento" required>
-        <option value="">Seleccionar</option>
-        <option value="DNI">DNI</option>
-        <option value="CE">Carnet de Extranjería</option>
-        <option value="PASAPORTE">Pasaporte</option>
-        <option value="RUC">RUC</option>
-      </select>
+    <div class="form-group"><label for="tipoDocumento">Tipo Documento:</label><select id="tipoDocumento" required><option value="">Seleccionar</option><option value="DNI">DNI</option><option value="CE">Carnet de Extranjería</option><option value="PASAPORTE">Pasaporte</option><option value="RUC">RUC</option></select></div>
+    <div class="form-group"><label for="numeroDocumento">Número de Documento:</label><input type="text" id="numeroDocumento" required placeholder="Ej: 12345678"/><div class="help-text">Ingresa el número sin puntos ni guiones.</div></div>
+    <div id="infoCliente" class="info"></div>
+    <div id="datosExtra" class="hidden">
+      <div class="form-group"><label for="nombreCompleto">Nombre Completo:</label><input type="text" id="nombreCompleto" placeholder="Ej: Juan Carlos Pérez García"/></div>
+      <div class="form-group"><label for="celular">Celular:</label><input type="tel" id="celular" placeholder="Ej: 982742560"/></div>
+      <div class="form-group"><label>Fecha de Nacimiento:</label><div class="fecha-grid"><select id="diaNacimiento"><option value="">Día</option></select><select id="mesNacimiento"><option value="">Mes</option></select><select id="anioNacimiento"><option value="">Año</option></select></div></div>
+      <div class="form-group"><label for="genero">Género:</label><select id="genero"><option value="">Seleccionar</option><option value="Femenino">Femenino</option><option value="Masculino">Masculino</option><option value="Prefiero no decirlo">Prefiero no decirlo</option></select></div>
+      <div class="form-group"><label for="canal">Canal: (¿Cómo conoció a Nuna Orgánica?)</label><select id="canal"><option value="">Seleccionar canal</option><option value="Tienda">Tienda</option><option value="Google">Google</option><option value="Recomendacion">Recomendación</option><option value="Facebook">Facebook</option><option value="Instagram">Instagram</option><option value="Tik Tok">Tik Tok</option><option value="Youtube">Youtube</option><option value="Otro">Otro</option></select></div>
+      <div class="form-group"><label for="distrito">Distrito:</label><select id="distrito"><option value="">Seleccionar distrito</option>
+<option value="1-DI-ANCON">1-DI-ANCON</option><option value="1-DI-ATE">1-DI-ATE</option><option value="1-DI-BARRANCO">1-DI-BARRANCO</option><option value="1-DI-BREÑA">1-DI-BREÑA</option><option value="1-DI-CALLAO">1-DI-CALLAO</option><option value="1-DI-CARABAYLLO">1-DI-CARABAYLLO</option><option value="1-DI-CARMEN DE LA LEGUA">1-DI-CARMEN DE LA LEGUA</option><option value="1-DI-CERCADO">1-DI-CERCADO</option><option value="1-DI-CHACLACAYO">1-DI-CHACLACAYO</option><option value="1-DI-CHORRILLOS">1-DI-CHORRILLOS</option><option value="1-DI-CHOSICA">1-DI-CHOSICA</option><option value="1-DI-CIENEGUILLA">1-DI-CIENEGUILLA</option><option value="1-DI-COMAS">1-DI-COMAS</option><option value="1-DI-EL AGUSTINO">1-DI-EL AGUSTINO</option><option value="1-DI-HUACHO">1-DI-HUACHO</option><option value="1-DI-HUAYCAN">1-DI-HUAYCAN</option><option value="1-DI-INDEPENDENCIA">1-DI-INDEPENDENCIA</option><option value="1-DI-JESUS MARIA">1-DI-JESUS MARIA</option><option value="1-DI-LA MOLINA">1-DI-LA MOLINA</option><option value="1-DI-LA VICTORIA">1-DI-LA VICTORIA</option><option value="1-DI-LINCE">1-DI-LINCE</option><option value="1-DI-LOS OLIVOS">1-DI-LOS OLIVOS</option><option value="1-DI-LURIN">1-DI-LURIN</option><option value="1-DI-MAGDALENA">1-DI-MAGDALENA</option><option value="1-DI-MIRAFLORES">1-DI-MIRAFLORES</option><option value="1-DI-PACHACAMAC">1-DI-PACHACAMAC</option><option value="1-DI-PACHACUTEC">1-DI-PACHACUTEC</option><option value="1-DI-PUCUSANA">1-DI-PUCUSANA</option><option value="1-DI-PUEBLO LIBRE">1-DI-PUEBLO LIBRE</option><option value="1-DI-PUENTE PIEDRE">1-DI-PUENTE PIEDRE</option><option value="1-DI-PUNTA HERMOSA">1-DI-PUNTA HERMOSA</option><option value="1-DI-PUNTA NEGRA">1-DI-PUNTA NEGRA</option><option value="1-DI-RIMAC">1-DI-RIMAC</option><option value="1-DI-SAN BARTOLO">1-DI-SAN BARTOLO</option><option value="1-DI-SAN BORJA">1-DI-SAN BORJA</option><option value="1-DI-SAN ISIDRO">1-DI-SAN ISIDRO</option><option value="1-DI-SAN LUIS">1-DI-SAN LUIS</option><option value="1-DI-SAN MIGUEL">1-DI-SAN MIGUEL</option><option value="1-DI-SANTA ANITA">1-DI-SANTA ANITA</option><option value="1-DI-SANTA MARIA DEL MAR">1-DI-SANTA MARIA DEL MAR</option><option value="1-DI-SANTA ROSA">1-DI-SANTA ROSA</option><option value="1-DI-SJL">1-DI-SJL</option><option value="1-DI-SJM">1-DI-SJM</option><option value="1-DI-SMP">1-DI-SMP</option><option value="1-DI-SURCO">1-DI-SURCO</option><option value="1-DI-SURQUILLO">1-DI-SURQUILLO</option><option value="1-DI-VENTANILLA">1-DI-VENTANILLA</option><option value="1-DI-VILLLA EL SALVADOR">1-DI-VILLLA EL SALVADOR</option><option value="1-DI-VILLLA MARIA DEL TRINFU">1-DI-VILLLA MARIA DEL TRINFU</option><option value="2-PROVINCIA-LIMA">2-PROVINCIA-LIMA</option><option value="3-DE-AMAZONAS">3-DE-AMAZONAS</option><option value="3-DE-ANCASH">3-DE-ANCASH</option><option value="3-DE-APURIMAC">3-DE-APURIMAC</option><option value="3-DE-AREQUIPA">3-DE-AREQUIPA</option><option value="3-DE-AYACUCHO">3-DE-AYACUCHO</option><option value="3-DE-CAJAMARCA">3-DE-CAJAMARCA</option><option value="3-DE-CUSCO">3-DE-CUSCO</option><option value="3-DE-HUANCAVELICA">3-DE-HUANCAVELICA</option><option value="3-DE-HUANUCO">3-DE-HUANUCO</option><option value="3-DE-ICA">3-DE-ICA</option><option value="3-DE-JUNIN">3-DE-JUNIN</option><option value="3-DE-LA LIBERTAD">3-DE-LA LIBERTAD</option><option value="3-DE-LAMBAYEQUE">3-DE-LAMBAYEQUE</option><option value="3-DE-LORETO">3-DE-LORETO</option><option value="3-DE-MOQUEGUA">3-DE-MOQUEGUA</option><option value="3-DE-PASCO">3-DE-PASCO</option><option value="3-DE-PIURA">3-DE-PIURA</option><option value="3-DE-PUNO">3-DE-PUNO</option><option value="3-DE-SAN MARTIN">3-DE-SAN MARTIN</option><option value="3-DE-TACNA">3-DE-TACNA</option><option value="3-DE-TUMBES">3-DE-TUMBES</option><option value="3-DE-UCAYALI">3-DE-UCAYALI</option><option value="4-EXTRANJERO">4-EXTRANJERO</option>
+</select></div>
+      <div class="form-group"><label for="correoElectronico">Correo Electrónico: <small>(opcional)</small></label><input type="email" id="correoElectronico" placeholder="Ej: cliente@gmail.com"/></div>
     </div>
-
-    <div class="form-group">
-      <label for="numeroDocumento">Número de Documento:</label>
-      <input type="text" id="numeroDocumento" required placeholder="Ej: 12345678" />
-      <div class="help-text">Primero verificaremos si ya tienes un registro.</div>
-    </div>
-
-    <div class="aviso" id="avisoNuevo">
-      No encontramos tus datos. Completa la información para crear tu registro y generar tu primer ticket.
-    </div>
-
-    <div class="bloque-datos" id="bloqueDatos">
-      <div class="form-group">
-        <label for="nombreCompleto">Nombre Completo:</label>
-        <input type="text" id="nombreCompleto" placeholder="Ej: Juan Carlos Pérez García" />
-      </div>
-
-      <div class="form-group">
-        <label for="celular">Celular:</label>
-        <input type="tel" id="celular" placeholder="Ej: 982742560" />
-      </div>
-
-      <div class="form-group">
-        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-        <input type="date" id="fechaNacimiento" />
-      </div>
-
-      <div class="form-group">
-        <label for="genero">Género:</label>
-        <select id="genero">
-          <option value="">Seleccionar</option>
-          <option value="Femenino">Femenino</option>
-          <option value="Masculino">Masculino</option>
-          <option value="Prefiero no decirlo">Prefiero no decirlo</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="canal">Canal: ¿Cómo conoció a Nuna Orgánica?</label>
-        <select id="canal">
-          <option value="">Seleccionar canal</option>
-          <option value="Tienda">Tienda</option>
-          <option value="Google">Google</option>
-          <option value="Recomendacion">Recomendación</option>
-          <option value="Facebook">Facebook</option>
-          <option value="Instagram">Instagram</option>
-          <option value="Tik Tok">Tik Tok</option>
-          <option value="Youtube">Youtube</option>
-          <option value="Otro">Otro</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="distrito">Distrito:</label>
-        <select id="distrito">
-          <option value="">Seleccionar distrito</option>
-        <option value="1-DI-ANCON">1-DI-ANCON</option>
-        <option value="1-DI-ATE">1-DI-ATE</option>
-        <option value="1-DI-BARRANCO">1-DI-BARRANCO</option>
-        <option value="1-DI-BREÑA">1-DI-BREÑA</option>
-        <option value="1-DI-CALLAO">1-DI-CALLAO</option>
-        <option value="1-DI-CARABAYLLO">1-DI-CARABAYLLO</option>
-        <option value="1-DI-CARMEN DE LA LEGUA">1-DI-CARMEN DE LA LEGUA</option>
-        <option value="1-DI-CERCADO">1-DI-CERCADO</option>
-        <option value="1-DI-CHACLACAYO">1-DI-CHACLACAYO</option>
-        <option value="1-DI-CHORRILLOS">1-DI-CHORRILLOS</option>
-        <option value="1-DI-CHOSICA">1-DI-CHOSICA</option>
-        <option value="1-DI-CIENEGUILLA">1-DI-CIENEGUILLA</option>
-        <option value="1-DI-COMAS">1-DI-COMAS</option>
-        <option value="1-DI-EL AGUSTINO">1-DI-EL AGUSTINO</option>
-        <option value="1-DI-HUACHO">1-DI-HUACHO</option>
-        <option value="1-DI-HUAYCAN">1-DI-HUAYCAN</option>
-        <option value="1-DI-INDEPENDENCIA">1-DI-INDEPENDENCIA</option>
-        <option value="1-DI-JESUS MARIA">1-DI-JESUS MARIA</option>
-        <option value="1-DI-LA MOLINA">1-DI-LA MOLINA</option>
-        <option value="1-DI-LA VICTORIA">1-DI-LA VICTORIA</option>
-        <option value="1-DI-LINCE">1-DI-LINCE</option>
-        <option value="1-DI-LOS OLIVOS">1-DI-LOS OLIVOS</option>
-        <option value="1-DI-LURIN">1-DI-LURIN</option>
-        <option value="1-DI-MAGDALENA">1-DI-MAGDALENA</option>
-        <option value="1-DI-MIRAFLORES">1-DI-MIRAFLORES</option>
-        <option value="1-DI-PACHACAMAC">1-DI-PACHACAMAC</option>
-        <option value="1-DI-PACHACUTEC">1-DI-PACHACUTEC</option>
-        <option value="1-DI-PUCUSANA">1-DI-PUCUSANA</option>
-        <option value="1-DI-PUEBLO LIBRE">1-DI-PUEBLO LIBRE</option>
-        <option value="1-DI-PUENTE PIEDRE">1-DI-PUENTE PIEDRE</option>
-        <option value="1-DI-PUNTA HERMOSA">1-DI-PUNTA HERMOSA</option>
-        <option value="1-DI-PUNTA NEGRA">1-DI-PUNTA NEGRA</option>
-        <option value="1-DI-RIMAC">1-DI-RIMAC</option>
-        <option value="1-DI-SAN BARTOLO">1-DI-SAN BARTOLO</option>
-        <option value="1-DI-SAN BORJA">1-DI-SAN BORJA</option>
-        <option value="1-DI-SAN ISIDRO">1-DI-SAN ISIDRO</option>
-        <option value="1-DI-SAN LUIS">1-DI-SAN LUIS</option>
-        <option value="1-DI-SAN MIGUEL">1-DI-SAN MIGUEL</option>
-        <option value="1-DI-SANTA ANITA">1-DI-SANTA ANITA</option>
-        <option value="1-DI-SANTA MARIA DEL MAR">1-DI-SANTA MARIA DEL MAR</option>
-        <option value="1-DI-SANTA ROSA">1-DI-SANTA ROSA</option>
-        <option value="1-DI-SJL">1-DI-SJL</option>
-        <option value="1-DI-SJM">1-DI-SJM</option>
-        <option value="1-DI-SMP">1-DI-SMP</option>
-        <option value="1-DI-SURCO">1-DI-SURCO</option>
-        <option value="1-DI-SURQUILLO">1-DI-SURQUILLO</option>
-        <option value="1-DI-VENTANILLA">1-DI-VENTANILLA</option>
-        <option value="1-DI-VILLLA EL SALVADOR">1-DI-VILLLA EL SALVADOR</option>
-        <option value="1-DI-VILLLA MARIA DEL TRINFU">1-DI-VILLLA MARIA DEL TRINFU</option>
-        <option value="2-PROVINCIA-LIMA">2-PROVINCIA-LIMA</option>
-        <option value="3-DE-AMAZONAS">3-DE-AMAZONAS</option>
-        <option value="3-DE-ANCASH">3-DE-ANCASH</option>
-        <option value="3-DE-APURIMAC">3-DE-APURIMAC</option>
-        <option value="3-DE-AREQUIPA">3-DE-AREQUIPA</option>
-        <option value="3-DE-AYACUCHO">3-DE-AYACUCHO</option>
-        <option value="3-DE-CAJAMARCA">3-DE-CAJAMARCA</option>
-        <option value="3-DE-CUSCO">3-DE-CUSCO</option>
-        <option value="3-DE-HUANCAVELICA">3-DE-HUANCAVELICA</option>
-        <option value="3-DE-HUANUCO">3-DE-HUANUCO</option>
-        <option value="3-DE-ICA">3-DE-ICA</option>
-        <option value="3-DE-JUNIN">3-DE-JUNIN</option>
-        <option value="3-DE-LA LIBERTAD">3-DE-LA LIBERTAD</option>
-        <option value="3-DE-LAMBAYEQUE">3-DE-LAMBAYEQUE</option>
-        <option value="3-DE-LORETO">3-DE-LORETO</option>
-        <option value="3-DE-MOQUEGUA">3-DE-MOQUEGUA</option>
-        <option value="3-DE-PASCO">3-DE-PASCO</option>
-        <option value="3-DE-PIURA">3-DE-PIURA</option>
-        <option value="3-DE-PUNO">3-DE-PUNO</option>
-        <option value="3-DE-SAN MARTIN">3-DE-SAN MARTIN</option>
-        <option value="3-DE-TACNA">3-DE-TACNA</option>
-        <option value="3-DE-TUMBES">3-DE-TUMBES</option>
-        <option value="3-DE-UCAYALI">3-DE-UCAYALI</option>
-        <option value="4-EXTRANJERO">4-EXTRANJERO</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="correoElectronico">Correo Electrónico: <small>(Opcional)</small></label>
-        <input type="email" id="correoElectronico" placeholder="Ej: cliente@gmail.com" />
-      </div>
-    </div>
-
-    <button type="submit" id="btnEnviar">Verificar documento</button>
-    <button type="button" class="secondary" id="btnEditarDoc" style="display:none;">Cambiar documento</button>
-
-    <div class="nota">
-      *La información registrada será usada solo para la gestión de la campaña y el sorteo.
-    </div>
+    <div class="actions"><button type="submit" id="btnEnviar">Continuar</button><button type="button" id="btnNuevo" class="btn-sec hidden">Registrar otro documento</button></div>
+    <div class="nota">*La información registrada será usada solo para la gestión de la campaña y el sorteo.</div>
   </form>
-
-  <div class="resultado" id="resultado">
-    <h2>✅ Registro completado</h2>
-    <p id="mensajeResultado">Datos confirmados y registrados exitosamente.</p>
-    <p>Tu ticket generado es:</p>
-    <div class="ticket" id="ticketTexto">NUNA-000001</div>
-    <p id="totalTexto">Ahora cuentas con 1 ticket para participar en el sorteo.</p>
-    <p><strong>¡Muchas gracias por participar!</strong></p>
-  </div>
-
+  <div class="resultado" id="resultado"><h2>✅ Registro completado</h2><p>Datos confirmados y registrados exitosamente.</p><p>Tu ticket generado es:</p><div class="ticket" id="ticketTexto">NUNA-000001</div><p id="totalTexto">Ahora cuentas con 1 ticket para participar en el sorteo.</p><p><strong>¡Muchas gracias por participar!</strong></p></div>
   <div class="error" id="errorBox">Ocurrió un error al registrar la información.</div>
 </div>
-
 <script>
-  const WEBHOOK_N8N_URL = "https://nuna-organica-2026-n8n.8jf75r.easypanel.host/webhook/formulario-tickets-nuna";
-
-  const form = document.getElementById("clienteForm");
-  const btnEnviar = document.getElementById("btnEnviar");
-  const btnEditarDoc = document.getElementById("btnEditarDoc");
-  const bloqueDatos = document.getElementById("bloqueDatos");
-  const avisoNuevo = document.getElementById("avisoNuevo");
-  const resultado = document.getElementById("resultado");
-  const errorBox = document.getElementById("errorBox");
-  const ticketTexto = document.getElementById("ticketTexto");
-  const totalTexto = document.getElementById("totalTexto");
-  const mensajeResultado = document.getElementById("mensajeResultado");
-
-  let modo = "verificar";
-
-  function limpiar(v) {
-    return String(v || "").trim();
-  }
-
-  function setExtraRequired(required) {
-    ["nombreCompleto", "celular", "fechaNacimiento", "genero", "canal", "distrito"].forEach(id => {
-      document.getElementById(id).required = required;
-    });
-  }
-
-  function mostrarError(mensaje) {
-    errorBox.textContent = mensaje || "Ocurrió un error al registrar la información.";
-    errorBox.style.display = "block";
-  }
-
-  function mostrarResultado(data) {
-    ticketTexto.textContent = data.ticket || "NUNA-000001";
-    const totalTickets = Number(data.total_tickets || 1);
-    totalTexto.textContent = `Ahora cuentas con ${totalTickets} ticket${totalTickets === 1 ? "" : "s"} para participar en el sorteo.`;
-    mensajeResultado.textContent = data.message || "Datos confirmados y registrados exitosamente.";
-    resultado.style.display = "block";
-    avisoNuevo.style.display = "none";
-    bloqueDatos.style.display = "none";
-    btnEditarDoc.style.display = "none";
-    btnEnviar.textContent = "Verificar documento";
-    modo = "verificar";
-    form.reset();
-    setExtraRequired(false);
-    document.getElementById("tipoDocumento").disabled = false;
-    document.getElementById("numeroDocumento").readOnly = false;
-    window.scrollTo({ top: resultado.offsetTop - 20, behavior: "smooth" });
-  }
-
-  btnEditarDoc.addEventListener("click", () => {
-    modo = "verificar";
-    bloqueDatos.style.display = "none";
-    avisoNuevo.style.display = "none";
-    btnEditarDoc.style.display = "none";
-    btnEnviar.textContent = "Verificar documento";
-    setExtraRequired(false);
-    document.getElementById("tipoDocumento").disabled = false;
-    document.getElementById("numeroDocumento").readOnly = false;
-  });
-
-  form.addEventListener("submit", async function(e) {
-    e.preventDefault();
-
-    errorBox.style.display = "none";
-    resultado.style.display = "none";
-
-    const tipoDocumento = document.getElementById("tipoDocumento").value;
-    const numeroDocumento = limpiar(document.getElementById("numeroDocumento").value);
-
-    const datos = {
-      action: modo,
-      tipo_documento: tipoDocumento,
-      numero_documento: numeroDocumento
-    };
-
-    if (modo === "registrar") {
-      datos.nombre_completo = limpiar(document.getElementById("nombreCompleto").value);
-      datos.celular = limpiar(document.getElementById("celular").value);
-      datos.fecha_nacimiento = document.getElementById("fechaNacimiento").value;
-      datos.genero = document.getElementById("genero").value;
-      datos.canal = document.getElementById("canal").value;
-      datos.distrito = document.getElementById("distrito").value;
-      datos.correo_electronico = limpiar(document.getElementById("correoElectronico").value);
-    }
-
-    btnEnviar.disabled = true;
-    btnEnviar.textContent = modo === "verificar" ? "Verificando..." : "Registrando...";
-
-    try {
-      const response = await fetch(WEBHOOK_N8N_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(datos)
-      });
-
-      const data = await response.json();
-
-      if (!response.ok || data.success === false) {
-        throw new Error(data.message || "Error en el registro");
-      }
-
-      if (data.requires_data === true) {
-        modo = "registrar";
-        avisoNuevo.style.display = "block";
-        bloqueDatos.style.display = "block";
-        btnEditarDoc.style.display = "block";
-        btnEnviar.textContent = "Registrar y generar ticket";
-        setExtraRequired(true);
-        document.getElementById("tipoDocumento").disabled = true;
-        document.getElementById("numeroDocumento").readOnly = true;
-        window.scrollTo({ top: avisoNuevo.offsetTop - 20, behavior: "smooth" });
-        return;
-      }
-
-      mostrarResultado(data);
-
-    } catch (error) {
-      console.error(error);
-      mostrarError(error.message);
-    } finally {
-      btnEnviar.disabled = false;
-      if (modo === "verificar") btnEnviar.textContent = "Verificar documento";
-      if (modo === "registrar") btnEnviar.textContent = "Registrar y generar ticket";
-    }
-  });
+const WEBHOOK_N8N_URL="https://nuna-organica-2026-n8n.8jf75r.easypanel.host/webhook/formulario-tickets-nuna";
+let paso="buscar";
+const form=document.getElementById("clienteForm"),btnEnviar=document.getElementById("btnEnviar"),btnNuevo=document.getElementById("btnNuevo"),datosExtra=document.getElementById("datosExtra"),infoCliente=document.getElementById("infoCliente"),resultado=document.getElementById("resultado"),errorBox=document.getElementById("errorBox"),ticketTexto=document.getElementById("ticketTexto"),totalTexto=document.getElementById("totalTexto");
+const diaSelect=document.getElementById("diaNacimiento"),mesSelect=document.getElementById("mesNacimiento"),anioSelect=document.getElementById("anioNacimiento");
+for(let d=1;d<=31;d++) diaSelect.innerHTML+=`<option value="${String(d).padStart(2,"0")}">${d}</option>`;
+for(let m=1;m<=12;m++) mesSelect.innerHTML+=`<option value="${String(m).padStart(2,"0")}">${m}</option>`;
+const anioActual=new Date().getFullYear(); for(let y=anioActual;y>=1920;y--) anioSelect.innerHTML+=`<option value="${y}">${y}</option>`;
+function setExtraRequired(required){["nombreCompleto","celular","diaNacimiento","mesNacimiento","anioNacimiento","genero","canal","distrito"].forEach(id=>document.getElementById(id).required=required)}
+function payloadBase(){return {tipo_documento:document.getElementById("tipoDocumento").value,numero_documento:document.getElementById("numeroDocumento").value.trim().replace(/\s+/g,"")}}
+function payloadCompleto(){const b=payloadBase(); return {...b,nombre_completo:document.getElementById("nombreCompleto").value.trim(),celular:document.getElementById("celular").value.trim(),fecha_nacimiento:`${anioSelect.value}-${mesSelect.value}-${diaSelect.value}`,genero:document.getElementById("genero").value,canal:document.getElementById("canal").value,distrito:document.getElementById("distrito").value,correo_electronico:document.getElementById("correoElectronico").value.trim()}}
+async function enviar(datos){const r=await fetch(WEBHOOK_N8N_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(datos)}); const data=await r.json(); if(!r.ok||data.success===false) throw new Error(data.message||"Error"); return data;}
+function mostrarResultado(data){ticketTexto.textContent=data.ticket||"NUNA-000001"; const total=Number(data.total_tickets||1); totalTexto.textContent=`Ahora cuentas con ${total} ticket${total===1?"":"s"} para participar en el sorteo.`; resultado.style.display="block"; btnNuevo.classList.remove("hidden"); window.scrollTo({top:resultado.offsetTop-20,behavior:"smooth"})}
+function limpiar(){form.reset(); paso="buscar"; datosExtra.classList.add("hidden"); infoCliente.style.display="none"; resultado.style.display="none"; errorBox.style.display="none"; btnEnviar.textContent="Continuar"; btnNuevo.classList.add("hidden"); setExtraRequired(false)}
+btnNuevo.addEventListener("click",limpiar);
+form.addEventListener("submit",async e=>{e.preventDefault(); errorBox.style.display="none"; resultado.style.display="none"; btnEnviar.disabled=true; btnEnviar.textContent=paso==="buscar"?"Validando...":"Registrando..."; try{ if(paso==="buscar"){const data=await enviar({...payloadBase(), accion:"buscar_o_sumar_ticket"}); if(data.cliente_existe===true || data.ticket){mostrarResultado(data);} else {paso="registrar"; datosExtra.classList.remove("hidden"); infoCliente.textContent="Cliente nuevo: completa los datos para generar su primer ticket."; infoCliente.style.display="block"; setExtraRequired(true); btnEnviar.textContent="Registrar participación"; window.scrollTo({top:datosExtra.offsetTop-20,behavior:"smooth"});}} else {const data=await enviar({...payloadCompleto(), accion:"registrar_cliente_y_ticket"}); mostrarResultado(data);}}catch(err){console.error(err); errorBox.textContent=err.message||"Ocurrió un error al registrar la información."; errorBox.style.display="block";} finally{btnEnviar.disabled=false; if(paso==="buscar") btnEnviar.textContent="Continuar"; else btnEnviar.textContent="Registrar participación";}});
+setExtraRequired(false);
 </script>
 </body>
 </html>
