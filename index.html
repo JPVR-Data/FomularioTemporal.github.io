@@ -152,8 +152,12 @@
       </div>
 
       <div class="form-group">
-        <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-        <input type="date" id="fechaNacimiento" />
+        <label>Fecha de Nacimiento:</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+          <select id="diaNacimiento"><option value="">Día</option></select>
+          <select id="mesNacimiento"><option value="">Mes</option></select>
+          <select id="anioNacimiento"><option value="">Año</option></select>
+        </div>
       </div>
 
       <div class="form-group">
@@ -303,12 +307,21 @@
 
   let modo = "verificar";
 
+const diaNacimiento=document.getElementById("diaNacimiento");
+const mesNacimiento=document.getElementById("mesNacimiento");
+const anioNacimiento=document.getElementById("anioNacimiento");
+for(let d=1;d<=31;d++){const v=String(d).padStart(2,"0");diaNacimiento.innerHTML+=`<option value="${v}">${d}</option>`;}
+for(let m=1;m<=12;m++){const v=String(m).padStart(2,"0");mesNacimiento.innerHTML+=`<option value="${v}">${m}</option>`;}
+const anioActual=new Date().getFullYear();
+for(let y=anioActual;y>=1920;y--){anioNacimiento.innerHTML+=`<option value="${y}">${y}</option>`;}
+
+
   function limpiar(v) {
     return String(v || "").trim();
   }
 
   function setExtraRequired(required) {
-    ["nombreCompleto", "celular", "fechaNacimiento", "genero", "canal", "distrito"].forEach(id => {
+    ["nombreCompleto","celular","diaNacimiento","mesNacimiento","anioNacimiento","genero","canal","distrito"].forEach(id => {
       document.getElementById(id).required = required;
     });
   }
@@ -365,7 +378,7 @@
     if (modo === "registrar") {
       datos.nombre_completo = limpiar(document.getElementById("nombreCompleto").value);
       datos.celular = limpiar(document.getElementById("celular").value);
-      datos.fecha_nacimiento = document.getElementById("fechaNacimiento").value;
+      datos.fecha_nacimiento=`${anioNacimiento.value}-${mesNacimiento.value}-${diaNacimiento.value}`;
       datos.genero = document.getElementById("genero").value;
       datos.canal = document.getElementById("canal").value;
       datos.distrito = document.getElementById("distrito").value;
